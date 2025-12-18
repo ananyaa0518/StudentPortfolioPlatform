@@ -2,8 +2,8 @@
 const nextConfig = {
   images: {
     domains: ["images.unsplash.com"],
-    devindicators: false,
   },
+  devIndicators: false,
 };
 
 export default nextConfig;
