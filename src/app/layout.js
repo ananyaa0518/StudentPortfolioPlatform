@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "SkillSync",
-  description: "Connect with developers & explore cool projects",
+  description: "Student portfolio platform to showcase skills, projects & journey",
 };
 
 export default function RootLayout({ children }) {
@@ -25,84 +25,76 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-gray-800`}
         style={{
           fontFamily: "'Segoe UI', sans-serif",
-          backgroundColor: "#ffffff",
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='35' viewBox='0 0 40 35'%3E%3Cg fill='%23fff5f8' fill-opacity='0.6'%3E%3Cpath d='M10 0l10 0 5 8.66 -5 8.66 -10 0 -5 -8.66zM30 0l10 0 5 8.66 -5 8.66 -10 0 -5 -8.66zM0 17.32l10 0 5 8.66 -5 8.66 -10 0 -5 -8.66zM20 17.32l10 0 5 8.66 -5 8.66 -10 0 -5 -8.66z'/%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "40px 35px",
+          backgroundColor: "#faf5ff",
+          backgroundImage:
+            "radial-gradient(circle at 0% 0%, rgba(244, 114, 182, 0.12), transparent 55%), radial-gradient(circle at 100% 100%, rgba(251, 113, 133, 0.12), transparent 55%)",
         }}
       >
-        <header
-          style={{
-            padding: "1.5rem 2rem",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: "rgba(255, 255, 255, 0.85)",
-            backdropFilter: "blur(6px)",
-            borderBottom: "1px solid #fcd5e5",
-            position: "sticky",
-            top: 0,
-            zIndex: 50,
-          }}
-        >
-          {/* Logo */}
-          <Image
-            src="/logo.png"
-            alt="SkillSync Logo"
-            height={90}
-            width={180}
-            style={{
-              height: "90px",
-              width: "auto",
-              objectFit: "contain",
-            }}
-            priority
-          />
+        <header className="sticky top-0 z-50 border-b border-rose-100 bg-white/85 backdrop-blur">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+            {/* Logo + small tagline */}
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="SkillSync Logo"
+                height={72}
+                width={160}
+                className="h-14 w-auto object-contain sm:h-16"
+                priority
+              />
+              <div className="hidden flex-col text-xs text-gray-500 sm:flex">
+                <span className="font-medium text-gray-700">
+                  Student portfolio platform
+                </span>
+                <span>Showcase your skills, projects & journey in one place.</span>
+              </div>
+            </div>
 
-          <nav style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-            <Link href="/" style={{ textDecoration: "none", color: "#be185d" }}>
-              Home
-            </Link>
-            <Link
-              href="/explore"
-              style={{ textDecoration: "none", color: "#be185d" }}
-            >
-              Explore
-            </Link>
-            <Link
-              href="/myprofile"
-              style={{ textDecoration: "none", color: "#be185d" }}
-            >
-              My profile
-            </Link>
-          </nav>
+            <nav className="flex items-center gap-2 sm:gap-4 text-sm sm:text-base">
+              <Link
+                href="/"
+                className="rounded-full px-3 py-1.5 font-medium text-rose-700 transition-colors hover:bg-rose-50"
+              >
+                Home
+              </Link>
+              <Link
+                href="/explore"
+                className="rounded-full px-3 py-1.5 font-medium text-rose-700 transition-colors hover:bg-rose-50"
+              >
+                Explore
+              </Link>
+              <Link
+                href="/myprofile"
+                className="rounded-full px-3 py-1.5 font-medium text-rose-700 transition-colors hover:bg-rose-50"
+              >
+                My profile
+              </Link>
+
+              {/* Primary CTA */}
+              <Link
+                href="/editprofile"
+                className="hidden items-center justify-center rounded-full bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all duration-150 hover:-translate-y-[1px] hover:bg-rose-700 hover:shadow-md sm:inline-flex"
+              >
+                Create portfolio
+              </Link>
+            </nav>
+          </div>
         </header>
 
-        <main
-          style={{
-            padding: "4rem 1.5rem",
-            maxWidth: "1000px",
-            margin: "0 auto",
-          }}
-        >
-          {children}
+        <main className="px-4 py-8 sm:px-6 sm:py-12">
+          <div className="mx-auto max-w-6xl">{children}</div>
         </main>
 
-        <footer
-          style={{
-            textAlign: "center",
-            padding: "2rem 1rem",
-            fontSize: "0.875rem",
-            color: "#9a9a9a",
-            borderTop: "1px solid #f5c2d7",
-            backgroundColor: "#fff0f5",
-            borderTopLeftRadius: "1.25rem",
-            borderTopRightRadius: "1.25rem",
-            marginTop: "3rem",
-          }}
-        >
-          &copy; {new Date().getFullYear()} <strong>SkillSync</strong> — All
-          rights reserved.
+        <footer className="mt-6 border-t border-rose-100 bg-white/80">
+          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-gray-500 sm:flex-row sm:text-sm">
+            <p>
+              &copy; {new Date().getFullYear()} <strong>SkillSync</strong> — All
+              rights reserved.
+            </p>
+            <p className="text-[11px] sm:text-xs">
+              Built for students to showcase their skills, projects & journeys.
+            </p>
+          </div>
         </footer>
       </body>
     </html>

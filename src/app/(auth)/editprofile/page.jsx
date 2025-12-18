@@ -25,9 +25,9 @@ export default function EditProfile() {
   const [loadingInitialData, setLoadingInitialData] = useState(true);
 
   const inputAndSelectClasses =
-    "w-full p-2 border rounded-md mb-2 bg-pink-50 focus:ring-pink-400 focus:border-pink-400";
+    "w-full rounded-md border border-rose-100 bg-rose-50/60 p-2 text-sm focus:border-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-200 mb-2";
   const textareaClasses =
-    "w-full p-2 border rounded-md bg-pink-50 min-h-[80px] focus:ring-pink-400 focus:border-pink-400";
+    "w-full rounded-md border border-rose-100 bg-rose-50/60 p-2 text-sm min-h-[80px] focus:border-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-200";
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -166,33 +166,26 @@ export default function EditProfile() {
   };
   if (loadingInitialData) {
     return (
-      <div className="max-w-3xl mx-auto p-6 text-gray-800 text-center">
-        Loading profile data...
+      <div className="flex min-h-[60vh] items-center justify-center px-4">
+        <div className="rounded-3xl bg-white/80 px-8 py-6 text-gray-800 shadow-lg ring-1 ring-rose-100">
+          Loading profile data...
+        </div>
       </div>
     );
   }
+
   return (
-    <div
-      className="max-w-3xl mx-auto p-6 rounded-lg shadow-xl text-gray-800"
-      style={{
-        backgroundColor: "#f3e2eb",
-        backgroundImage:
-          "url('https://www.transparenttextures.com/patterns/hexellence.png')",
-        backgroundRepeat: "repeat",
-        backgroundSize: "auto",
-        opacity: 0.98,
-      }}
-    >
-      <div className="max-w-2xl mx-auto bg-pink-100 p-8 rounded-lg shadow-lg">
-        <h2 className="text-4xl font-extrabold text-center text-pink-700 mb-8 drop-shadow-md">
-          Edit Profile
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-10">
+      <div className="w-full max-w-4xl rounded-3xl bg-white/80 p-6 text-gray-800 shadow-xl ring-1 ring-rose-100 sm:p-10">
+        <h2 className="mb-6 text-center text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
+          Edit your portfolio
         </h2>
         {message && (
           <div
-            className={`p-3 mb-4 rounded-md text-sm ${
-              message.startsWith("Error")
-                ? "bg-red-100 text-red-700"
-                : "bg-green-100 text-green-700"
+            className={`mb-4 rounded-2xl px-4 py-3 text-sm ${
+              message.toLowerCase().includes("error")
+                ? "bg-red-50 text-red-700 ring-1 ring-red-100"
+                : "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
             }`}
           >
             {message}
@@ -200,10 +193,10 @@ export default function EditProfile() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Basic Information */}
-          <section className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-2xl font-bold text-pink-700 mb-4 drop-shadow-sm border-b-2 border-pink-200 pb-2">
-              Basic Information
+          {/* Basic information */}
+          <section className="rounded-2xl bg-white/80 p-5 shadow-sm ring-1 ring-rose-50">
+            <h3 className="mb-4 border-b border-rose-100 pb-2 text-lg font-semibold text-gray-900">
+              Basic information
             </h3>
             <div>
               <label className="block font-semibold mb-1 text-gray-700">
@@ -282,21 +275,21 @@ export default function EditProfile() {
             </div>
           </section>
 
-          {/* Skills Section */}
-          <section className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-2xl font-bold text-pink-700 mb-4 drop-shadow-sm border-b-2 border-pink-200 pb-2">
+          {/* Skills */}
+          <section className="rounded-2xl bg-white/80 p-5 shadow-sm ring-1 ring-rose-50">
+            <h3 className="mb-4 border-b border-rose-100 pb-2 text-lg font-semibold text-gray-900">
               Skills
             </h3>
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="space-y-3 p-4 border border-pink-200 rounded-md relative bg-pink-50 mb-4"
+                className="relative mb-4 space-y-3 rounded-xl border border-rose-100 bg-rose-50/60 p-4"
               >
                 {skills.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeSkills(index)}
-                    className="absolute top-2 right-2 text-red-600 hover:text-red-800 text-xl font-bold"
+                    className="absolute right-2 top-2 text-lg font-bold text-red-500 hover:text-red-700"
                     aria-label={`Remove skill ${index + 1}`}
                   >
                     &times;
@@ -336,27 +329,27 @@ export default function EditProfile() {
             <button
               type="button"
               onClick={addSkills}
-              className="bg-pink-600 text-white px-5 py-2 rounded-md hover:bg-pink-700 transition duration-200 shadow-md"
+              className="inline-flex items-center justify-center rounded-full bg-rose-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-rose-700"
             >
-              Add More Skill
+              Add another skill
             </button>
           </section>
 
-          {/* Experience Section */}
-          <section className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-2xl font-bold text-pink-700 mb-4 drop-shadow-sm border-b-2 border-pink-200 pb-2">
+          {/* Experience */}
+          <section className="rounded-2xl bg-white/80 p-5 shadow-sm ring-1 ring-rose-50">
+            <h3 className="mb-4 border-b border-rose-100 pb-2 text-lg font-semibold text-gray-900">
               Experience
             </h3>
             {experience.map((exp, index) => (
               <div
                 key={index}
-                className="space-y-3 p-4 border border-pink-200 rounded-md relative bg-pink-50 mb-4"
+                className="relative mb-4 space-y-3 rounded-xl border border-rose-100 bg-rose-50/60 p-4"
               >
                 {experience.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeExperience(index)}
-                    className="absolute top-2 right-2 text-red-600 hover:text-red-800 text-xl font-bold"
+                    className="absolute right-2 top-2 text-lg font-bold text-red-500 hover:text-red-700"
                     aria-label={`Remove experience ${index + 1}`}
                   >
                     &times;
@@ -418,27 +411,27 @@ export default function EditProfile() {
             <button
               type="button"
               onClick={addExperience}
-              className="bg-pink-600 text-white px-5 py-2 rounded-md hover:bg-pink-700 transition duration-200 shadow-md"
+              className="inline-flex items-center justify-center rounded-full bg-rose-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-rose-700"
             >
-              Add More Experience
+              Add another experience
             </button>
           </section>
 
-          {/* Projects Section */}
-          <section className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-2xl font-bold text-pink-700 mb-4 drop-shadow-sm border-b-2 border-pink-200 pb-2">
+          {/* Projects */}
+          <section className="rounded-2xl bg-white/80 p-5 shadow-sm ring-1 ring-rose-50">
+            <h3 className="mb-4 border-b border-rose-100 pb-2 text-lg font-semibold text-gray-900">
               Projects
             </h3>
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="space-y-3 p-4 border border-pink-200 rounded-md relative bg-pink-50 mb-4"
+                className="relative mb-4 space-y-3 rounded-xl border border-rose-100 bg-rose-50/60 p-4"
               >
                 {projects.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeProjects(index)}
-                    className="absolute top-2 right-2 text-red-600 hover:text-red-800 text-xl font-bold"
+                    className="absolute right-2 top-2 text-lg font-bold text-red-500 hover:text-red-700"
                     aria-label={`Remove project ${index + 1}`}
                   >
                     &times;
@@ -487,19 +480,19 @@ export default function EditProfile() {
             <button
               type="button"
               onClick={addProjects}
-              className="bg-pink-600 text-white px-5 py-2 rounded-md hover:bg-pink-700 transition duration-200 shadow-md"
+              className="inline-flex items-center justify-center rounded-full bg-rose-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-rose-700"
             >
-              Add More Project
+              Add another project
             </button>
           </section>
 
-          {/* Save Button */}
-          <div className="text-center pt-4">
+          {/* Save button */}
+          <div className="pt-4 text-center">
             <button
               type="submit"
-              className="bg-purple-700 text-white px-8 py-3 rounded-full hover:bg-purple-800 font-bold text-lg shadow-lg transition-transform duration-200 hover:scale-105"
+              className="inline-flex items-center justify-center rounded-full bg-rose-600 px-8 py-3 text-sm font-semibold text-white shadow-md transition-all duration-150 hover:-translate-y-[1px] hover:bg-rose-700 hover:shadow-lg sm:text-base"
             >
-              Save Portfolio
+              Save portfolio
             </button>
           </div>
         </form>

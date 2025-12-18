@@ -26,140 +26,49 @@ export default function Explore() {
 
   if (loading) {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "1.2rem",
-        }}
-      >
-        Loading portfolios...
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <div className="rounded-3xl bg-white/80 px-8 py-6 text-gray-800 shadow-lg ring-1 ring-rose-100">
+          Loading portfolios...
+        </div>
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: "2rem 1rem",
-        backgroundColor: "white",
-        color: "#000",
-        fontFamily: "'Poppins', sans-serif",
-      }}
-    >
-      <h1
-        style={{
-          textAlign: "center",
-          fontSize: "3.2rem",
-          fontWeight: "800",
-          marginBottom: "2.5rem",
-          color: "#c2185b",
-          textShadow: "2px 2px 4px rgba(255, 182, 193, 0.5)",
-          WebkitTextStroke: "0.8px #f8bbd0",
-          letterSpacing: "1px",
-        }}
-      >
-        Explore Students
-      </h1>
+    <div className="max-w-6xl mx-auto">
+      <div className="rounded-3xl bg-white/80 px-4 py-8 sm:px-8 sm:py-10 shadow-xl ring-1 ring-rose-100 text-gray-800">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-rose-700 mb-6">
+          Explore students
+        </h1>
 
-      {error && (
-        <p style={{ color: "red", textAlign: "center", marginBottom: "1rem" }}>
-          {error}
-        </p>
-      )}
+        {error && (
+          <p className="mb-4 text-center text-sm text-red-600">{error}</p>
+        )}
 
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "2rem",
-        }}
-      >
-        {users.map((user) => (
-          <Link key={user._id} href={`/profile/${user._id}`} passHref>
-            <div
-              style={{
-                background: "#ffe6f0",
-                borderRadius: "1rem",
-                height: "400px",
-                display: "flex",
-                flexDirection: "column",
-                boxShadow: "0 0 15px 2px rgba(255, 105, 180, 0.3)",
-                border: "1px solid #ffb6c1",
-                cursor: "pointer",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.03)";
-                e.currentTarget.style.boxShadow =
-                  "0 0 20px 4px rgba(255, 105, 180, 0.5)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow =
-                  "0 0 15px 2px rgba(255, 105, 180, 0.3)";
-              }}
-            >
-              <div
-                style={{
-                  flex: "1",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderBottom: "1px solid #f5c6d6",
-                }}
-              >
-                <div
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    borderRadius: "50%",
-                    background: "#d966a8",
-                    color: "white",
-                    fontSize: "2.5rem",
-                    fontWeight: "bold",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {user.name?.charAt(0).toUpperCase() || "?"}
+        <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {users.map((user) => (
+            <Link key={user._id} href={`/profile/${user._id}`} passHref>
+              <div className="group flex h-64 flex-col rounded-2xl bg-rose-50/80 p-4 shadow-md ring-1 ring-rose-100 transition-all duration-150 hover:-translate-y-1 hover:shadow-lg hover:ring-rose-200 cursor-pointer">
+                <div className="flex flex-1 items-center justify-center border-b border-rose-100 pb-4">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-rose-300 to-rose-500 text-3xl font-bold text-white shadow-md">
+                    {user.name?.charAt(0).toUpperCase() || "?"}
+                  </div>
+                </div>
+
+                <div className="flex flex-1 flex-col items-center justify-center pt-4 text-center">
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    {user.name}
+                  </h2>
+                  <p className="mt-1 text-xs text-gray-600">
+                    {user.universityName}
+                    <br />
+                    {user.courseName}
+                  </p>
                 </div>
               </div>
-
-              <div
-                style={{
-                  flex: "1",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "1rem",
-                }}
-              >
-                <h2 style={{ fontSize: "1.6rem", marginBottom: "0.5rem" }}>
-                  {user.name}
-                </h2>
-                <p
-                  style={{
-                    fontSize: "1rem",
-                    textAlign: "center",
-                    color: "#444",
-                  }}
-                >
-                  {user.universityName}
-                  <br />
-                  {user.courseName}
-                </p>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
